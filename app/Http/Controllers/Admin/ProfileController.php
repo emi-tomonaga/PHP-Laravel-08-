@@ -10,6 +10,8 @@ class ProfileController extends Controller
 {
     public function add()
     {
+      $posts = Profile::all();
+      dd($posts);
         return view('admin.profile.create');
     }
 
@@ -25,8 +27,7 @@ class ProfileController extends Controller
       
       // フォームから送信されてきた_tokenを削除する
       unset($form['_token']);
-      
-      // データベースに保存する
+    // データベースに保存する
       $news->fill($form);
       $news->save();
         
@@ -43,7 +44,7 @@ class ProfileController extends Controller
         abort(404);    
       }
       return view('admin.profile.edit', ['profile_form' => $news]);
-  
+
     }
 
     public function update()
