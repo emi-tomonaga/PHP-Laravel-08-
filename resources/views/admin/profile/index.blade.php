@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.profile')
 @section('title', '登録済みプロフィールの一覧')
 
 @section('content')
@@ -31,6 +31,7 @@
                     <table class="table table-dark">
                         <thead>
                             <tr>
+                                <th width="10%">ID</th>
                                 <th width="10%">氏名</th>
                                 <th width="10%">性別</th>
                                 <th width="20%">趣味</th>
@@ -38,11 +39,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $news)
+                            @foreach($posts as $profile)
                                 <tr>
-                                    <th>{{ $news->id }}</th>
-                                    <td>{{ \Str::limit($news->title, 100) }}</td>
-                                    <td>{{ \Str::limit($news->body, 250) }}</td>
+                                    <th>{{ $profile->id }}</th>
+                                    <td>{{ str_limit($profile->name, 20) }}</td>
+                                    <td>{{ str_limit($profile->gender, 10) }}</td>
+                                    <td>{{ str_limit($profile->hobby, 100) }}</td>
+                                    <td>{{ str_limit($profile->introduction, 100) }}</td>
+                                    <div>
+                                            <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
+                                        </div>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -10,8 +10,6 @@ class ProfileController extends Controller
 {
     public function add()
     {
-      $posts = Profile::all();
-      dd($posts);
         return view('admin.profile.create');
     }
 
@@ -21,29 +19,29 @@ class ProfileController extends Controller
       // Varidationを行う
       $this->validate($request, Profile::$rules);
 
-      $news = new Profile;
+      $profile = new Profile;
       $form = $request->all();
       
       
       // フォームから送信されてきた_tokenを削除する
       unset($form['_token']);
     // データベースに保存する
-      $news->fill($form);
-      $news->save();
+      $profile->fill($form);
+      $profile->save();
         
         
         return redirect('admin/profile/create');
     }
 
 
-    public function edit()
+    public function edit(Request $request)
     {
         // News Modelからデータを取得する
-      $news = Profile::find($request->id);
-      if (empty($news)) {
+      $profile = Profile::find($request->id);
+      if (empty($profile)) {
         abort(404);    
       }
-      return view('admin.profile.edit', ['profile_form' => $news]);
+      return view('admin.profile.edit', ['profile_form' => $profile]);
 
     }
 
@@ -52,23 +50,23 @@ class ProfileController extends Controller
         // Validationをかける
       $this->validate($request, Profile::$rules);
       // News Modelからデータを取得する
-      $news = Profile::find($request->id);
+      $profile = Profile::find($request->id);
       // 送信されてきたフォームデータを格納する
-      $news_form = $request->all();
+      $profile_form = $request->all();
       if ($request->remove == 'true') {
-          $news_form['image_path'] = null;
+          $profile_form['image_path'] = null;
       } elseif ($request->file('image')) {
           $path = $request->file('image')->store('public/image');
-          $news_form['image_path'] = basename($path);
+          $profile_form['image_path'] = basename($path);
       } else {
-          $news_form['image_path'] = $news->image_path;
+          $profile_form['image_path'] = $profile->image_path;
       }
 
-      unset($news_form['image']);
-      unset($news_form['remove']);
-      unset($news_form['_token']);
+      unset($profile_form['image']);
+      unset($profile_form['remove']);
+      unset($profile_form['_token']);
       // 該当するデータを上書きして保存する
-      $news->fill($news_form)->save();
+      $profile->fill($profile_form)->save();
         return redirect('admin/profile/update');
     }
 }
