@@ -91,7 +91,7 @@ public function update(Request $request)
       $history->edited_at = Carbon::now();
       $history->save();
 
-      return redirect('admin/news');
+      return redirect('admin/news/');
   }
 public function delete(Request $request)
   {
