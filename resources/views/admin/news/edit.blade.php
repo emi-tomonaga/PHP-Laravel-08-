@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row"
+                    <div class="form-group row">
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $news_form->id }}">
                             {{ csrf_field() }}
