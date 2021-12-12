@@ -2,27 +2,32 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The policy mappings for the application.
      *
-     * @return void
+     * @var array
      */
-    public function register()
-    {
-        //
-    }
+    protected $policies = [
+        // 'App\Model' => 'App\Policies\ModelPolicy',
+    ];
 
     /**
-     * Bootstrap any application services.
+     * Register any authentication / authorization services.
      *
      * @return void
      */
-    public function boot()
-    {
-        \URL::forceScheme('https'); 
+    
+
+public function boot()
+{
+    // 以下を追記
+    if (\App::environment('production')) {
+        \URL::forceScheme('https');
     }
+}
 }
