@@ -37,7 +37,7 @@
                                     {{ $post->updated_at->format('Y年m月d日') }}
                                 </div>
                                 <div class="name">
-                                        {{ str_limit($post->name, 20) }}
+                                        {{ str_limit($post->name, 10) }}
                                 </div>
                                 <div class="gender mt-3">
                                         {{ str_limit($post->gender, 10) }}

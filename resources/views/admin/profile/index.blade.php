@@ -42,7 +42,7 @@
                             @foreach($posts as $profile)
                                 <tr>
                                     <th>{{ $profile->id }}</th>
-                                    <td>{{ \Str::limit($profile->name, 20) }}</td>
+                                    <td>{{ \Str::limit($profile->name, 10) }}</td>
                                     <td>{{ \Str::limit($profile->gender, 10) }}</td>
                                     <td>{{ \Str::limit($profile->hobby, 100) }}</td>
                                     <td>{{ \Str::limit($profile->introduction, 100) }}</td>
