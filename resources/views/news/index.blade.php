@@ -11,7 +11,7 @@
                             <div class="caption mx-auto">
                                 <div class="image">
                                     @if ($headline->image_path)
-                                        <img src="{{ asset('storage/image/' . $headline->image_path) }}">
+                                    <img src="{{ $headline->image_path }}">
                                     @endif
                                 </div>
                                 <div class="title p-2">
